@@ -1,13 +1,51 @@
 <?php
 
 if (isset($_COOKIE['login'])) {
-    header('location: home.php');
+    header('location: admin/index.php');
+}
+
+function vali_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 $error = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST['email'] == 'a@a.a' && $_POST['password'] == '123') {
+
+    $db_servername = "localhost";
+    $db_username = "root";
+    $db_password = "root";
+    $db_name = "php67";
+
+    try {
+        // Start Connection Query
+        $conn = new PDO("mysql:host=$db_servername;dbname=$db_name", $db_username, $db_password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // End Connction Query
+
+        $email = vali_input($_POST['email']);
+        $password = vali_input($_POST['password']);
+        // Select user from DB
+        $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $conn = null;
+    } catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
+
+    // if ($_POST['email'] == 'a@a.a' && $_POST['password'] == '123') {
+    if (count($result) > 0) {
 
         /* if ($_POST['remeber']) {
             $expire = time() + (86400 * 30);
@@ -22,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header('location: /admin/');
     } else {
-        $error = 'wrong user!';
+        $error = 'Wrong user!';
     }
 }
 ?>
@@ -101,6 +139,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+            <p>
+                <a href="register.php">Register a new account</a>
+            </p>
         </form>
     </main>
 
