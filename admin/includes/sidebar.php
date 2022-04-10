@@ -8,15 +8,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Blogs
+                <a class="nav-link" href="/admin/users">
+                    <span data-feather="shopping-cart"></span>
+                    Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Users
+                <a class="nav-link" href="/admin/blogs.php">
+                    <span data-feather="file"></span>
+                    Blogs
                 </a>
             </li>
             <li class="nav-item">

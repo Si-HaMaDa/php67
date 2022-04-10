@@ -1,4 +1,6 @@
 <?php
+$page_title = 'Dashboard';
+
 require './includes/header.php';
 ?>
 <div class="container-fluid">
