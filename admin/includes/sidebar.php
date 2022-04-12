@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/blogs.php">
+                <a class="nav-link" href="/admin/blogs">
                     <span data-feather="file"></span>
                     Blogs
                 </a>
