@@ -8,6 +8,7 @@ require '../includes/header.php';
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     $conn->query("DELETE FROM blogs WHERE id=$id");
+    header('location: index.php');
 }
 // End Delete Blog
 

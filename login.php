@@ -57,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $expire = $_POST['remeber'] ? time() + (86400 * 30) : time() + 86400;
 
         setcookie('login', 'logged', $expire);
+        setcookie('is_admin', $result[0]['is_admin'], $expire);
 
         header('location: /admin/');
     } else {

@@ -5,6 +5,8 @@ require 'helpers.php';
 
 if (!isset($_COOKIE['login'])) {
     header('location: ../login.php');
+} elseif (!isset($_COOKIE['is_admin']) || $_COOKIE['is_admin'] != 1) {
+    header('location: ../index.php');
 }
 
 ?>
